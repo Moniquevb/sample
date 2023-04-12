@@ -1,4 +1,3 @@
-import { join } from "path";
 export const config = {
     //
     // ====================
@@ -6,8 +5,9 @@ export const config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    
-    port: 4723,
+    user: process.env.user || 'user',
+    key: process.env.key || 'key',
+    //port: 4723,
     //
     // ==================
     // Specify Test Files
@@ -54,13 +54,26 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        'appium:platformName': 'Android',
-        'appium:platformVersion': '12.0',
-        'appium:deviceName': 'Pixel 3a',
-        //This should be the exact same name from the device you use in the Android Emulator
-        'appium:automationName': 'UiAutomator2',
-        'appium:app': join(process.cwd(), 'app/Android/ApiDemos-debug.apk')
-    }],
+        platformName: "Android",
+        "appium:platformVersion": "9.0",
+        "appium:deviceName": "Google Pixel 3",
+        "appium:app": "bs://224b9705d8a3b1a4f9754d74a3e7713bc596beed",
+
+    },
+        // {
+        //     platformName: "Android",
+        //     "appium:platformVersion": "10.0",
+        //     "appium:deviceName": "Samsung Galaxy Note 20",
+        //     "appium:app": "bs://224b9705d8a3b1a4f9754d74a3e7713bc596beed",
+
+        // },
+        // {
+        //     platformName: "Android",
+        //     "appium:platformVersion": "12.0",
+        //     "appium:deviceName": "Samsung Galaxy S22",
+        //     "appium:app": "bs://224b9705d8a3b1a4f9754d74a3e7713bc596beed",
+        // }
+    ],
     //
     // ===================
     // Test Configurations
@@ -108,8 +121,8 @@ export const config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [['appium']],
-    
+    services: [['browserstack']],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -159,7 +172,7 @@ export const config = {
         // <boolean> Enable this config to treat undefined definitions as warnings.
         ignoreUndefinedDefinitions: false
     },
-    
+
     //
     // =====
     // Hooks
@@ -280,7 +293,7 @@ export const config = {
      */
     // afterFeature: function (uri, feature) {
     // },
-    
+
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {String} commandName hook command name
